@@ -1,3 +1,4 @@
+
 ############################ Installs Packages if Needed #####################################################
 
 list.of.packages <- c("ggplot2", "tidyverse", "agricolae", "labelled", "vegan")
@@ -30,6 +31,7 @@ GRASS_MASS <- read.csv("Grass Substrate Project - Data_MASS.csv")
 GRASS_MASS$Soil<- factor(GRASS_MASS$Soil, levels = c("ProMix-55BK", "A1", "B1", "ProMix-Bx"))
 
 # Box Plots Dry Shoot Weight#
+Dry_Shoot =
 ggplot(GRASS_MASS, aes(x=Soil, y=Shoot.Weight, fill = Soil)) + 
   geom_boxplot(show.legend = FALSE) +
   facet_grid(. ~ Species) +
@@ -38,10 +40,20 @@ ggplot(GRASS_MASS, aes(x=Soil, y=Shoot.Weight, fill = Soil)) +
         strip.text.x = element_text(size = 12, face="bold"),
         axis.title.y =  element_text(size = 12, face="bold"),
         axis.text.x = element_text(face="bold")) +
+  theme(
+    panel.background = element_rect(fill='transparent'),
+    plot.background = element_rect(fill='transparent', color=NA),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    legend.background = element_rect(fill='transparent'),
+    legend.box.background = element_rect(fill='transparent')
+  ) +
   ylab("Shoot Weight (g)") +
   xlab("") +
   guides(fill=guide_legend(title="Substrate Media")) + 
   scale_fill_manual(values=c("indianred", "seagreen1", "gold3", "slateblue3"))
+Dry_Shoot
+ggsave('Dry.Shoot.png', Dry_Shoot, bg='transparent')
 
 # Two-Way ANOVA Dry Shoot Weight #
 two.way <- aov(Shoot.Weight ~ Species + Soil + Species*Soil, data = GRASS_MASS)
@@ -83,6 +95,7 @@ summary(s.one.way)
 ############################## Dry Root Weight ################################################################
 
 # Box Plots  Dry Root Weight #
+Dry_Root = 
 ggplot(GRASS_MASS, aes(x=Soil, y=Root.Weight, fill = Soil)) + 
   geom_boxplot(show.legend = FALSE) +
   facet_grid(. ~ Species) +
@@ -91,10 +104,20 @@ ggplot(GRASS_MASS, aes(x=Soil, y=Root.Weight, fill = Soil)) +
         strip.text.x = element_text(size = 12, face="bold"),
         axis.title.y =  element_text(size = 12, face="bold"),
         axis.text.x = element_text(face="bold")) +
+  theme(
+    panel.background = element_rect(fill='transparent'),
+    plot.background = element_rect(fill='transparent', color=NA),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    legend.background = element_rect(fill='transparent'),
+    legend.box.background = element_rect(fill='transparent')
+  ) +
   ylab("Root Weight (g)") +
   xlab("") +
   guides(fill=guide_legend(title="Substrate Media")) + 
   scale_fill_manual(values=c("indianred", "seagreen1", "gold3", "slateblue3"))
+Dry_Root
+ggsave('Dry.Root.png', Dry_Root, bg='transparent')
 
 # Two-Way ANOVA Dry Root Weight #
 two.way <- aov(Root.Weight ~ Species + Soil + Species*Soil, data = GRASS_MASS)
@@ -127,4 +150,3 @@ summary(w.one.way)
 
 s.one.way <- aov(Breaking.Point ~ Soil, data = sugar)
 summary(s.one.way)
-
