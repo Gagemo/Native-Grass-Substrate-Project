@@ -1,3 +1,4 @@
+
 ############################ Installs Packages if Needed #####################################################
 
 list.of.packages <- c("ggplot2", "tidyverse", "agricolae", "labelled", "vegan")
@@ -30,6 +31,7 @@ GRASS <- read.csv("Grass Substrate Project - Data.csv")
 GRASS$Soil<- factor(GRASS$Soil, levels = c("ProMix-55BK", "A1", "B1", "ProMix-Bx"))
 
 # Box Plots Average Max Growth Heights #
+Avg_Max = 
 ggplot(GRASS, aes(x=Soil, y=Average.Max.Height, fill = Soil)) + 
   geom_boxplot(show.legend = FALSE) +
   facet_grid(. ~ Species) +
@@ -38,15 +40,28 @@ ggplot(GRASS, aes(x=Soil, y=Average.Max.Height, fill = Soil)) +
         strip.text.x = element_text(size = 12, face="bold"),
         axis.title.y =  element_text(size = 12, face="bold"),
         axis.text.x = element_text(face="bold")) +
+  theme(
+    panel.background = element_rect(fill='transparent'),
+    plot.background = element_rect(fill='transparent', color=NA),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    legend.background = element_rect(fill='transparent'),
+    legend.box.background = element_rect(fill='transparent')
+  ) +
   ylab("Average Max Height (cm)") +
   xlab("") +
   guides(fill=guide_legend(title="Substrate Media")) + 
   scale_fill_manual(values=c("indianred", "seagreen1", "gold3", "slateblue3"))
+Avg_Max
+
+ggsave('Average.Max.Growth.Height.png', Avg_Max, bg='transparent')
+
 
 # Two-Way ANOVA Average Max Growth Heights #
 
 two.way <- aov(Average.Max.Height ~ Species + Soil + Species*Soil, data = GRASS)
 summary(two.way)
+capture.output(summary(two.way),file="test.doc")
 
 par(mfrow=c(2,2))
 plot(two.way)
@@ -66,6 +81,7 @@ plot(tukey.plot.test, las = 1)
 HSD.stat = HSD.test(two.way,trt = c("Species","Soil")) #HSD Tukey 
 HSD.stat
 
+plot(HSD.stat , las=1 , col="brown")
 
 # One-Way ANOVA Average Max Growth Heights #
 indian = filter(GRASS, Species == "Indiangrass")
@@ -85,6 +101,7 @@ summary(s.one.way)
 ############################## Breaking Point Heights ################################################################
 
 # Box Plots  Breaking Point Heights #
+Break =
 ggplot(GRASS, aes(x=Soil, y=Breaking.Point, fill = Soil)) + 
   geom_boxplot(show.legend = FALSE) +
   facet_grid(. ~ Species) +
@@ -93,10 +110,20 @@ ggplot(GRASS, aes(x=Soil, y=Breaking.Point, fill = Soil)) +
         strip.text.x = element_text(size = 12, face="bold"),
         axis.title.y =  element_text(size = 12, face="bold"),
         axis.text.x = element_text(face="bold")) +
+  theme(
+    panel.background = element_rect(fill='transparent'),
+    plot.background = element_rect(fill='transparent', color=NA),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    legend.background = element_rect(fill='transparent'),
+    legend.box.background = element_rect(fill='transparent')
+  ) +
   ylab("Breaking Point Height (cm)") +
   xlab("") +
   guides(fill=guide_legend(title="Substrate Media")) + 
   scale_fill_manual(values=c("indianred", "seagreen1", "gold3", "slateblue3"))
+Break
+ggsave('Breaking.Point.Heights.png', Break, bg='transparent')
 
 # Two-Way ANOVA Breaking Point Heights #
 
