@@ -46,8 +46,6 @@ conflict_prefer("count", "dplyr", quiet = TRUE)
 conflict_prefer("select", "dplyr", quiet = TRUE)
 conflict_prefer("arrange", "dplyr", quiet = TRUE)
 
-############ Loads Data & Transforms Map Data to Correct Format ################
-
 voucher = read.csv("Clean_Data/Grass Substrate Project - RangeMap.csv")
 FL_sf <- st_read("Clean_Data/geojson-fl-counties-fips.json", quiet = TRUE) %>% 
   st_transform(4326)
@@ -172,7 +170,7 @@ S.secundum = leaflet(FL_ind, options = leafletOptions(zoomControl = TRUE)) %>%
                    radius = 3.5, fill = TRUE, fillColor = "gold", opacity = 1,
                    fillOpacity = 1, color = "black", 
                    options = pathOptions(pane = "layer4")) %>%
-  addLegend("bottomright", 
+  addLegend("bottomleft", 
             colors = c("forestgreen", "gold"),
             labels = 
               c("Florida Plant Atlas County Vouchers", "iNat Observations"),
@@ -205,7 +203,7 @@ A.beryichiana = leaflet(FL_wire,
                    radius = 3.5, fill = TRUE, fillColor = "gold", opacity = 1,
                    fillOpacity = 1, color = "black", 
                    options = pathOptions(pane = "layer4")) %>%
-  addLegend("bottomright", 
+  addLegend("bottomleft", 
             colors = c("forestgreen", "gold"),
             labels = 
               c("Florida Plant Atlas County Vouchers", "iNat Observations"),
@@ -238,7 +236,7 @@ S.giganteum =
                    radius = 3.5, fill = TRUE, fillColor = "gold", opacity = 1,
                    fillOpacity = 1, color = "black", 
                    options = pathOptions(pane = "layer4")) %>%
-  addLegend("bottomright", 
+  addLegend("bottomleft", 
             colors = c("forestgreen", "gold"),
             labels = 
               c("Florida Plant Atlas County Vouchers", "iNat Observations"),
