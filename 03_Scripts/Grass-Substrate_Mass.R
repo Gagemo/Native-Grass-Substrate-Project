@@ -97,11 +97,11 @@ tukey.plot.test.S
 tukey.plot.test.R<-TukeyHSD(two.way.R)
 tukey.plot.test.R
 
-HSD = HSD.test(two.way.S, trt = c("Species","Soil"))
-HSD
+HSD.S = HSD.test(two.way.S, trt = c("Species","Soil"))
+HSD.S
 
-HSD = HSD.test(two.way.R, trt = c("Species","Soil"))
-HSD
+HSD.R = HSD.test(two.way.R, trt = c("Species","Soil"))
+HSD.R
 
 i.tukey.S <- TukeyHSD(i.one.way.S)
 i.tukey.S

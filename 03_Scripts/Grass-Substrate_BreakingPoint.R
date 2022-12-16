@@ -114,7 +114,7 @@ BREAK =
   scale_fill_manual(values=c("indianred", "seagreen1", "gold3", "slateblue3"))
 BREAK
 
-ggsave("05_Figures/Breaking.Height.png", Avg_Max, bg='white',
+ggsave("05_Figures/Breaking.Height.png", BREAK, bg='white',
        scale = 1, width = 12, height = 9, dpi = 500)
 
 
