@@ -33,19 +33,20 @@ library(ggsignif)
 
 ########################### Load Data ##########################################
 
-GRASS <- read.csv("02_Clean_Data/Grass_Substrate_Data_Height-Visual.csv")
+GRASS <- read.csv("01_Data/Grass Substrate Project - Aboveground Growth.csv")
 
 ########## Organizes Substrate Treatments for Display in Graphs Later ##########
 
 GRASS$Soil = factor(GRASS$Soil, 
-                    levels = c("ProMix-55BK", "A1", "B1", "ProMix-Bx"))
+                    levels = c("ProMix55BK", "NativeMix", 
+                               "GardenMix", "ProMixBx"))
 
 ################## Two-Way ANOVA Breaking Point Height #########################
 
 two.way <- 
-  aov(Breaking.Point ~ Species + Soil + Species*Soil, data = GRASS)
+  aov(Breaking_Point ~ Species*Soil, data = GRASS)
 summary(two.way)
-capture.output(summary(two.way), file="05_Figures/Two_Way_AvgMaxHgt.doc")
+capture.output(summary(two.way), file="03_Figures/Two_Way_AvgMaxHgt.doc")
 ## INTERACTION BETWEEN SPECIES & SOIL NOT SIGNIFICANT ##
 ## BREAKING POINT HEIGHT WAS SIGNIFICANTLY AFFECTED BY SOIL   ##
 
@@ -61,22 +62,16 @@ indian = filter(GRASS, Species == "Indiangrass")
 wire = filter(GRASS, Species == "Wiregrass")
 sugar = filter(GRASS, Species == "Sugarcane")
 
-i.one.way <- aov(Breaking.Point ~ Soil, data = indian)
+i.one.way <- aov(Breaking_Point ~ Soil, data = indian)
 summary(i.one.way)
 
-w.one.way <- aov(Breaking.Point ~ Soil, data = wire)
+w.one.way <- aov(Breaking_Point ~ Soil, data = wire)
 summary(w.one.way)
 
-s.one.way <- aov(Breaking.Point ~ Soil, data = sugar)
+s.one.way <- aov(Breaking_Point ~ Soil, data = sugar)
 summary(s.one.way)
 
 ########################## Tukey Test - Multiple Comparisons ###################
-
-tukey.plot.test<-TukeyHSD(two.way)
-tukey.plot.test
-
-HSD = HSD.test(two.way, trt = c("Species","Soil"))
-HSD
 
 i.tukey <- TukeyHSD(i.one.way)
 i.tukey
@@ -90,17 +85,17 @@ s.tukey
 ################### Box Plot - Breaking Point Height ######################
 
 BREAK = 
-  ggplot(GRASS, aes(x=Soil, y=Breaking.Point, fill = Soil)) + 
-  geom_boxplot(show.legend = FALSE) +
-  geom_signif(comparisons = list(c("A1", "ProMix-Bx")), 
+  ggplot(GRASS, aes(x=Soil, y=Breaking_Point, fill = Soil)) + 
+  geom_violin(show.legend = FALSE) +
+  geom_signif(comparisons = list(c("NativeMix", "ProMixBx")), 
               map_signif_level = TRUE) +
   facet_grid(. ~ Species) +
   theme_bw() +
-  theme(axis.text = element_text(face="bold"), 
-        strip.text.x = element_text(size = 12, face="bold"),
+  theme(axis.text = element_text(size = 20, face="bold"), 
+        strip.text.x = element_text(size = 20, face="bold"),
         axis.title.y =  element_text(margin = unit(c(0, 5, 0, 0), "mm"),
-                                     size = 12, face="bold"),
-        axis.text.x = element_text(face="bold"),
+                                     size = 20, face="bold"),
+        axis.text.x = element_text(size = 15),
         panel.background = element_rect(fill='white'),
         plot.background = element_rect(fill='white', color=NA),
         panel.grid.major = element_blank(),
@@ -114,10 +109,10 @@ BREAK =
   scale_fill_manual(values=c("indianred", "seagreen1", "gold3", "slateblue3"))
 BREAK
 
-ggsave("05_Figures/Breaking.Height.png", BREAK, bg='white',
-       scale = 1, width = 12, height = 9, dpi = 500)
+ggsave("03_Figures/Breaking.Height.png", BREAK, bg='white',
+       scale = 1, width = 16, height = 6, dpi = 1500)
 
 
 ###### Correlation of Average Max Growth Height & Breaking Point Height ########
 
-cor.test(GRASS$Average.Max.Height, GRASS$Breaking.Point)
+cor.test(GRASS$Average_Max_Height, GRASS$Breaking_Point)

@@ -34,14 +34,14 @@ library(car)
 
 ########################### Load Data ##########################################
 
-GRASS <- read.csv("02_Clean_Data/Grass Substrate Project - Soil Data.csv")
+GRASS <- read.csv("01_Data/Grass Substrate Project - Soil Data.csv")
 
 ### Calculates Averages ###
 
 Soil_Prop = data.frame(tapply(GRASS$Mass, GRASS$Soil, mean), 
-                       tapply(GRASS$Water.Volume, GRASS$Soil, mean),
-                       tapply(GRASS$Wet.Mass, GRASS$Soil, mean),
-                       tapply(GRASS$Dry.Mass, GRASS$Soil, mean))
+                       tapply(GRASS$Water_Volume, GRASS$Soil, mean),
+                       tapply(GRASS$Wet_Mass, GRASS$Soil, mean),
+                       tapply(GRASS$Dry_Mass, GRASS$Soil, mean))
 colnames(Soil_Prop) <- c("Mass_Ave","Water_Volume_Ave", "Wet_Ave", "Dry_Ave")
 
 ### Calculates Bulk Density, Particle Density, Air Filled Porosity,         ###
@@ -49,12 +49,17 @@ colnames(Soil_Prop) <- c("Mass_Ave","Water_Volume_Ave", "Wet_Ave", "Dry_Ave")
 # 5.55 grams represents pot weight and 160 mL represents volume of container ##
 
 GRASS$Bulk = ((GRASS$Mass)-(5.55))/160
-GRASS$ParticleDensity = ((GRASS$Dry.Mass)/160)
-GRASS$AirPorosity = ((GRASS$Water.Volume*100)/160)
-GRASS$ContainerCapacity = ((((GRASS$Wet.Mass) - 5.55)*100)/160)
+GRASS$ParticleDensity = ((GRASS$Dry_Mass)/160)
+GRASS$AirPorosity = ((GRASS$Water_Volume*100)/160)
+GRASS$ContainerCapacity = ((((GRASS$Wet_Mass) - 5.55)*100)/160)
 GRASS$TotalPorosity = (GRASS$AirPorosity+GRASS$ContainerCapacity)
-GRASS$MoistureContent = ((GRASS$Mass - GRASS$Dry.Mass)*100)/5.55
+GRASS$MoistureContent = ((GRASS$Mass - GRASS$Dry_Mass)*100)/5.55
 
+GRASS %>%
+  group_by(Soil) %>%
+  summarise_at(vars(Mass, Water_Volume, Wet_Mass, Dry_Mass, Bulk, 
+                    ParticleDensity, AirPorosity, ContainerCapacity, 
+                    TotalPorosity, MoistureContent), list(name = mean))
 ####################### ANOVA ##############################
 
 ANOVA_Bulk <- 

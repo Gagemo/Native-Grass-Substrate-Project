@@ -33,26 +33,29 @@ library(ggsignif)
 
 ########################### Load Data ##########################################
 
-GRASS <- read.csv("02_Clean_Data/Grass_Substrate_Data_Mass.csv")
+GRASS <- read.csv("01_Data/Grass Substrate Project - Root_Shoot Mass.csv")
 
 ########## Organizes Substrate Treatments for Display in Graphs Later ##########
 
 GRASS$Soil = factor(GRASS$Soil, 
-                    levels = c("ProMix-55BK", "A1", "B1", "ProMix-Bx"))
+                    levels = c("ProMix55BK", "NativeMix", 
+                               "GardenMix", "ProMixBx"))
 
 ################## Two-Way ANOVA Root/Shoot Mass ###############################
 
 two.way.S <- 
-  aov(Shoot.Weight ~ Species + Soil + Species*Soil, data = GRASS)
+  aov(Shoot_Weight ~ Species*Soil, data = GRASS)
 summary(two.way.S)
-capture.output(summary(two.way.S), file="05_Figures/Two_Way_Shoot.doc")
+capture.output(summary(two.way.S), file="03_Figures/Two_Way_Shoot.doc")
+
 ## INTERACTION BETWEEN SPECIES & SOIL SIGNIFICANT ##
 ## SHOOT MASS WAS SIGNIFICANTLY AFFECTED BY SOIL   ##
 
 two.way.R <- 
-  aov(Root.Weight ~ Species + Soil + Species*Soil, data = GRASS)
+  aov(Root_Weight ~ Species*Soil, data = GRASS)
 summary(two.way.R)
-capture.output(summary(two.way.R), file="05_Figures/Two_Way_Root.doc")
+capture.output(summary(two.way.R), file="03_Figures/Two_Way_Root.doc")
+
 ## INTERACTION BETWEEN SPECIES & SOIL SIGNIFICANT ##
 ## ROOT MASS WAS SIGNIFICANTLY AFFECTED BY SOIL   ##
 
@@ -71,22 +74,22 @@ indian = filter(GRASS, Species == "Indiangrass")
 wire = filter(GRASS, Species == "Wiregrass")
 sugar = filter(GRASS, Species == "Sugarcane")
 
-i.one.way.S <- aov(Shoot.Weight ~ Soil, data = indian)
+i.one.way.S <- aov(Shoot_Weight ~ Soil, data = indian)
 summary(i.one.way.S)
 
-w.one.way.S <- aov(Shoot.Weight ~ Soil, data = wire)
+w.one.way.S <- aov(Shoot_Weight ~ Soil, data = wire)
 summary(w.one.way.S)
 
-s.one.way.S <- aov(Shoot.Weight ~ Soil, data = sugar)
+s.one.way.S <- aov(Shoot_Weight ~ Soil, data = sugar)
 summary(s.one.way.S)
 
-i.one.way.R <- aov(Root.Weight ~ Soil, data = indian)
+i.one.way.R <- aov(Root_Weight ~ Soil, data = indian)
 summary(i.one.way.R)
 
-w.one.way.R <- aov(Root.Weight ~ Soil, data = wire)
+w.one.way.R <- aov(Root_Weight ~ Soil, data = wire)
 summary(w.one.way.R)
 
-s.one.way.R <- aov(Root.Weight ~ Soil, data = sugar)
+s.one.way.R <- aov(Root_Weight ~ Soil, data = sugar)
 summary(s.one.way.R)
 
 ########################## Tukey Test - Multiple Comparisons ###################
@@ -119,22 +122,45 @@ s.tukey.R
 
 #################### Correlation Test - Shoot/Root Mass ########################
 
-cor.test(GRASS$Shoot.Weight, GRASS$Root.Weight)
+cor.test(GRASS$Shoot_Weight, GRASS$Root_Weight)
+
+##################      Creates Storage for       ##############################
+################## Significance Letters for Graph ##############################
+
+tukey.cld <- multcompLetters4(two.way.S, tukey.plot.test.S)
+print(tukey.cld)
+
+dt <- GRASS %>% 
+  group_by(Species, Soil) %>%
+  summarise(w=mean(exp(Shoot_Weight)), 
+            sd = sd(exp(Shoot_Weight)) / sqrt(n())) %>%
+  arrange(desc(w)) %>% 
+  ungroup() %>% 
+  mutate(Soil = factor(Soil,
+                            levels = c("ProMix55BK", "NativeMix", 
+                                       "GardenMix", "ProMixBx"),
+                            ordered = TRUE))
+
+cld2 <- data.frame(letters = tukey.cld$`Species:Soil`$Letters)
+dt$tukey.cld <- cld2$letters
 
 ################### Box Plot - Root/Shoot Mass #################################
 
 SHOOT = 
-  ggplot(GRASS, aes(x=Soil, y=Shoot.Weight, fill = Soil)) + 
-  geom_boxplot(show.legend = FALSE) +
-  geom_signif(comparisons = list(c("A1", "ProMix-Bx")), 
-              map_signif_level = TRUE) +
+  ggplot(GRASS, aes(x=Soil, y=Shoot_Weight, fill = Soil)) + 
+  geom_violin(show.legend = FALSE) +
+  geom_text(data = dt, aes(label = tukey.cld, y = 18), vjust = -0.5) +
+ #geom_signif(comparisons = list(c("NativeMix", "ProMixBx"), 
+ #                              c("ProMix55BK", "ProMixBx" )),
+ #                                y_position = c(18, 20), 
+ #             map_signif_level = TRUE) +
   facet_grid(. ~ Species) +
   theme_bw() +
-  theme(axis.text = element_text(face="bold"), 
-        strip.text.x = element_text(size = 12, face="bold"),
+  theme(axis.text = element_text(size = 20, face="bold"), 
+        strip.text.x = element_text(size = 20, face="bold"),
         axis.title.y =  element_text(margin = unit(c(0, 5, 0, 0), "mm"),
-                                     size = 12, face="bold"),
-        axis.text.x = element_text(face="bold"),
+                                     size = 20, face="bold"),
+        axis.text.x = element_text(size = 15, face="bold"),
         panel.background = element_rect(fill='white'),
         plot.background = element_rect(fill='white', color=NA),
         panel.grid.major = element_blank(),
@@ -148,21 +174,22 @@ SHOOT =
   scale_fill_manual(values=c("indianred", "seagreen1", "gold3", "slateblue3"))
 SHOOT
 
-ggsave("05_Figures/Shoot.Mass.png", SHOOT, bg='white',
-       scale = 1, width = 12, height = 9, dpi = 500)
+ggsave("03_Figures/Shoot.Mass.png", SHOOT, bg= NA,
+       scale = 1, width = 16, height = 6, dpi = 1500)
 
 ROOT = 
-  ggplot(GRASS, aes(x=Soil, y=Root.Weight, fill = Soil)) + 
-  geom_boxplot(show.legend = FALSE) +
-  geom_signif(comparisons = list(c("A1", "ProMix-Bx")), 
-              map_signif_level = TRUE) +
+  ggplot(GRASS, aes(x=Soil, y=Root_Weight, fill = Soil)) + 
+  geom_violin(show.legend = FALSE) +
+  geom_text(data = dt, aes(label = tukey.cld, y = 36), vjust = -0.5) +
+  #geom_signif(comparisons = list(c("NativeMix", "ProMixBx")), 
+ #            map_signif_level = TRUE) +
   facet_grid(. ~ Species) +
   theme_bw() +
-  theme(axis.text = element_text(face="bold"), 
-        strip.text.x = element_text(size = 12, face="bold"),
+  theme(axis.text = element_text(size = 20, face="bold"), 
+        strip.text.x = element_text(size = 20, face="bold"),
         axis.title.y =  element_text(margin = unit(c(0, 5, 0, 0), "mm"),
-                                     size = 12, face="bold"),
-        axis.text.x = element_text(face="bold"),
+                                     size = 20, face="bold"),
+        axis.text.x = element_text(size = 15, face="bold"),
         panel.background = element_rect(fill='white'),
         plot.background = element_rect(fill='white', color=NA),
         panel.grid.major = element_blank(),
@@ -176,5 +203,5 @@ ROOT =
   scale_fill_manual(values=c("indianred", "seagreen1", "gold3", "slateblue3"))
 ROOT
 
-ggsave("05_Figures/Root.Mass.png", ROOT, bg='white',
-       scale = 1, width = 12, height = 9, dpi = 500)
+ggsave("03_Figures/Root.Mass.png", ROOT, bg= NA,
+       scale = 1, width = 16, height = 6, dpi = 1500)
