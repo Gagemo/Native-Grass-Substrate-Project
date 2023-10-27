@@ -86,27 +86,39 @@ s.tukey
 
 BREAK = 
   ggplot(GRASS, aes(x=Soil, y=Breaking_Point, fill = Soil)) + 
-  geom_violin(show.legend = FALSE) +
+  geom_violin(size = 0.5, color="black") +
+  geom_point(shape=16, show.legend = FALSE) +
   geom_signif(comparisons = list(c("NativeMix", "ProMixBx")), 
-              map_signif_level = TRUE) +
+              size=0.8, textsize=5, fontface = "bold") +
   facet_grid(. ~ Species) +
   theme_bw() +
-  theme(axis.text = element_text(size = 20, face="bold"), 
-        strip.text.x = element_text(size = 20, face="bold"),
+  theme_bw() +
+  theme(plot.title = element_blank(),
+        axis.title.x = element_blank(),
+        axis.text.x=element_blank(),
         axis.title.y =  element_text(margin = unit(c(0, 5, 0, 0), "mm"),
                                      size = 20, face="bold"),
-        axis.text.x = element_text(size = 15),
-        panel.background = element_rect(fill='white'),
-        plot.background = element_rect(fill='white', color=NA),
+        axis.text.y = element_text(size=15, face="bold", color = "black"),
+        panel.background = element_rect(color=NA),
+        plot.background = element_rect(color=NA),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
-        legend.background = element_rect(fill='white'),
-        legend.box.background = element_rect(fill='white'),
-        strip.background = element_blank()) +
+        legend.background = element_rect(color=NA),
+        legend.box.background = element_rect(color=NA),
+        strip.background = element_blank(),
+        legend.title = element_text(color = "black", size = 20, face="bold"),
+        legend.text = element_text(color = "black", size = 20),
+        legend.position="bottom",
+        strip.text = element_text(color = "black", size = 20, face="bold"),
+        text = element_text(family = "sans"),
+        axis.ticks.x=element_blank()) +
   ylab("Breaking Point Height (cm)") +
   xlab("") +
-  guides(fill=guide_legend(title="Substrate Media")) + 
-  scale_fill_manual(values=c("indianred", "seagreen1", "gold3", "slateblue3"))
+  scale_fill_manual(name = "Substrate Media", 
+                    labels = c("ProMix 55BK", "Native Mix", 
+                               "Garden Mix", "ProMix Bx"), 
+                    values=c("indianred", "seagreen1", 
+                             "gold3", "slateblue3"))
 BREAK
 
 ggsave("03_Figures/Breaking.Height.png", BREAK, bg='white',

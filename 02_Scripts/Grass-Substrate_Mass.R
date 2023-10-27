@@ -149,29 +149,39 @@ dt$tukey.cld <- cld2$letters
 SHOOT = 
   ggplot(GRASS, aes(x=Soil, y=Shoot_Weight, fill = Soil)) + 
   geom_violin(show.legend = FALSE) +
-  geom_text(data = dt, aes(label = tukey.cld, y = 18), vjust = -0.5) +
+  geom_text(data = dt, aes(label = tukey.cld, y = 18), 
+            vjust = -0.5, size=6) +
  #geom_signif(comparisons = list(c("NativeMix", "ProMixBx"), 
  #                              c("ProMix55BK", "ProMixBx" )),
  #                                y_position = c(18, 20), 
  #             map_signif_level = TRUE) +
   facet_grid(. ~ Species) +
   theme_bw() +
-  theme(axis.text = element_text(size = 20, face="bold"), 
-        strip.text.x = element_text(size = 20, face="bold"),
+  theme(plot.title = element_blank(),
+        axis.title.x = element_blank(),
+        axis.text.x=element_blank(),
         axis.title.y =  element_text(margin = unit(c(0, 5, 0, 0), "mm"),
                                      size = 20, face="bold"),
-        axis.text.x = element_text(size = 15, face="bold"),
-        panel.background = element_rect(fill='white'),
-        plot.background = element_rect(fill='white', color=NA),
+        axis.text.y = element_text(size=15, face="bold", color = "black"),
+        panel.background = element_rect(color=NA),
+        plot.background = element_rect(color=NA),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
-        legend.background = element_rect(fill='white'),
-        legend.box.background = element_rect(fill='white'),
-        strip.background = element_blank()) +
+        legend.background = element_rect(color=NA),
+        legend.box.background = element_rect(color=NA),
+        strip.background = element_blank(),
+        legend.title = element_text(color = "black", size = 20, face="bold"),
+        legend.text = element_text(color = "black", size = 20),
+        strip.text = element_text(color = "black", size = 20, face="bold"),
+        text = element_text(family = "sans"),
+        axis.ticks.x=element_blank())  +
   ylab("Dry Shoot Mass (g)") +
   xlab("") +
-  guides(fill=guide_legend(title="Substrate Media")) + 
-  scale_fill_manual(values=c("indianred", "seagreen1", "gold3", "slateblue3"))
+  scale_fill_manual(name = "Substrate Media", 
+                    labels = c("ProMix 55BK", "Native Mix", 
+                               "Garden Mix", "ProMix Bx"), 
+                    values=c("indianred", "seagreen1", 
+                             "gold3", "slateblue3"))
 SHOOT
 
 ggsave("03_Figures/Shoot.Mass.png", SHOOT, bg= NA,
@@ -179,28 +189,41 @@ ggsave("03_Figures/Shoot.Mass.png", SHOOT, bg= NA,
 
 ROOT = 
   ggplot(GRASS, aes(x=Soil, y=Root_Weight, fill = Soil)) + 
-  geom_violin(show.legend = FALSE) +
-  geom_text(data = dt, aes(label = tukey.cld, y = 36), vjust = -0.5) +
-  #geom_signif(comparisons = list(c("NativeMix", "ProMixBx")), 
- #            map_signif_level = TRUE) +
+  geom_violin() +
+  geom_text(data = dt, aes(label = tukey.cld, y = 35), 
+            vjust = -0.5, size=6) +
+  #geom_signif(comparisons = list(c("NativeMix", "ProMixBx"), 
+  #                              c("ProMix55BK", "ProMixBx" )),
+  #                                y_position = c(18, 20), 
+  #             map_signif_level = TRUE) +
   facet_grid(. ~ Species) +
   theme_bw() +
-  theme(axis.text = element_text(size = 20, face="bold"), 
-        strip.text.x = element_text(size = 20, face="bold"),
+  theme(plot.title = element_blank(),
+        axis.title.x = element_blank(),
+        axis.text.x=element_blank(),
         axis.title.y =  element_text(margin = unit(c(0, 5, 0, 0), "mm"),
                                      size = 20, face="bold"),
-        axis.text.x = element_text(size = 15, face="bold"),
-        panel.background = element_rect(fill='white'),
-        plot.background = element_rect(fill='white', color=NA),
+        axis.text.y = element_text(size=15, face="bold", color = "black"),
+        panel.background = element_rect(color=NA),
+        plot.background = element_rect(color=NA),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
-        legend.background = element_rect(fill='white'),
-        legend.box.background = element_rect(fill='white'),
-        strip.background = element_blank()) +
+        legend.background = element_rect(color=NA),
+        legend.box.background = element_rect(color=NA),
+        strip.background = element_blank(),
+        legend.title = element_text(color = "black", size = 20, face="bold"),
+        legend.text = element_text(color = "black", size = 20),
+        legend.position="bottom",
+        strip.text = element_text(color = "black", size = 20, face="bold"),
+        text = element_text(family = "sans"),
+        axis.ticks.x=element_blank())  +
   ylab("Dry Root Mass (g)") +
   xlab("") +
-  guides(fill=guide_legend(title="Substrate Media")) + 
-  scale_fill_manual(values=c("indianred", "seagreen1", "gold3", "slateblue3"))
+  scale_fill_manual(name = "Substrate Media", 
+                    labels = c("ProMix 55BK", "Native Mix", 
+                               "Garden Mix", "ProMix Bx"), 
+                    values=c("indianred", "seagreen1", 
+                             "gold3", "slateblue3"))
 ROOT
 
 ggsave("03_Figures/Root.Mass.png", ROOT, bg= NA,

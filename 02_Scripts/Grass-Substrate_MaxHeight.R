@@ -18,7 +18,7 @@ cat("\014")
 ##########################    Installs Packages   ##############################
 
 list.of.packages <- c("tidyverse", "agricolae", "labelled", 
-                      "multcompView", "ggsignif")
+                      "multcompView", "ggsignif", "showtext")
 new.packages <- list.of.packages[!(list.of.packages %in% 
                                      installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
@@ -30,6 +30,7 @@ library(labelled)
 library(agricolae)
 library(multcompView)
 library(ggsignif)
+library(showtext)
 
 ########################### Load Data ##########################################
 
@@ -113,28 +114,38 @@ s.tukey
 
 Avg_Max = 
 ggplot(GRASS, aes(x = Soil, y = Average_Max_Height, fill = Soil)) + 
-  geom_violin(color="black", show.legend = FALSE) +
+  geom_violin(size = 0.5, color="black", show.legend = FALSE) +
+  geom_point(shape=16, show.legend = FALSE) +
   facet_grid(. ~ Species) +
   geom_signif(comparisons = list(c("NativeMix", "ProMixBx")), 
-              map_signif_level = TRUE) +
+              size=0.8, textsize=5, fontface = "bold") +
   #geom_text(data = dt, aes(label = tukey.cld, y = 95), vjust = -0.5) +
   theme_bw() +
-  theme(axis.text = element_text(size = 20, face="bold"), 
-        strip.text.x = element_text(size = 20, face="bold"),
+  theme(plot.title = element_blank(),
+        axis.title.x = element_blank(),
+        axis.text.x=element_blank(),
         axis.title.y =  element_text(margin = unit(c(0, 5, 0, 0), "mm"),
                                                    size = 20, face="bold"),
-        axis.text.x = element_text(size = 15, face="bold"),
+        axis.text.y = element_text(size=15, face="bold", color = "black"),
         panel.background = element_rect(color=NA),
         plot.background = element_rect(color=NA),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         legend.background = element_rect(color=NA),
         legend.box.background = element_rect(color=NA),
-        strip.background = element_blank()) +
+        strip.background = element_blank(),
+        legend.title = element_text(color = "black", size = 20, face="bold"),
+        legend.text = element_text(color = "black", size = 20),
+        strip.text = element_text(color = "black", size = 20, face="bold"),
+        text = element_text(family = "sans"),
+        axis.ticks.x=element_blank()) +
   ylab("Average Max Height (cm)") +
   xlab("") +
-  guides(fill=guide_legend(title="Substrate Media")) + 
-  scale_fill_manual(values=c("indianred", "seagreen1", "gold3", "slateblue3"))
+  scale_fill_manual(name = "Substrate Media", 
+                    labels = c("ProMix 55BK", "Native Mix", 
+                               "Garden Mix", "ProMix Bx"), 
+                    values=c("indianred", "seagreen1", 
+                             "gold3", "slateblue3"))
 Avg_Max
 
 ggsave("03_Figures/Average.Max.Growth.Height2.png", Avg_Max, bg= NA,
