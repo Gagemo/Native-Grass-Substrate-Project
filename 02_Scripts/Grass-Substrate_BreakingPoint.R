@@ -50,37 +50,26 @@ capture.output(summary(two.way), file="03_Figures/Two_Way_AvgMaxHgt.doc")
 ## INTERACTION BETWEEN SPECIES & SOIL NOT SIGNIFICANT ##
 ## BREAKING POINT HEIGHT WAS SIGNIFICANTLY AFFECTED BY SOIL   ##
 
+########################## Tukey Test - Multiple Comparisons ###################
+
+tukey <-TukeyHSD(two.way)
+tukey
+
+HSD = HSD.test(two.way, trt = c("Species","Soil"))
+HSD
+## SIGNIFICANCE: SUGARCANE: BX VS A1 ##
+
 ################## Plot Residuals, Q-Q Plot ####################################
 
 par(mfrow=c(2,2))
 plot(two.way)
 
-##################  One-Way ANOVA - Breaking Point Height #################
-### Create Individual Data Frames to Analyze Variance per Species ###
+################# Shapiro-Wilk Test ############################################
 
-indian = filter(GRASS, Species == "Indiangrass")
-wire = filter(GRASS, Species == "Wiregrass")
-sugar = filter(GRASS, Species == "Sugarcane")
-
-i.one.way <- aov(Breaking_Point ~ Soil, data = indian)
-summary(i.one.way)
-
-w.one.way <- aov(Breaking_Point ~ Soil, data = wire)
-summary(w.one.way)
-
-s.one.way <- aov(Breaking_Point ~ Soil, data = sugar)
-summary(s.one.way)
-
-########################## Tukey Test - Multiple Comparisons ###################
-
-i.tukey <- TukeyHSD(i.one.way)
-i.tukey
-w.tukey<-TukeyHSD(w.one.way)
-w.tukey
-s.tukey<-TukeyHSD(s.one.way)
-s.tukey
-
-## SIGNIFICANCE: SUGARCANE: BX VS A1 ##
+# Extract the residuals
+aov_residuals <- residuals(object = two.way)
+# Run Shapiro-Wilk test
+shapiro.test(x = aov_residuals)
 
 ################### Box Plot - Breaking Point Height ######################
 
@@ -115,8 +104,8 @@ BREAK =
   ylab("Breaking Point Height (cm)") +
   xlab("") +
   scale_fill_manual(name = "Substrate Media", 
-                    labels = c("ProMix 55BK", "Native Mix", 
-                               "Garden Mix", "ProMix Bx"), 
+                    labels = c("Pro-Mix 55BK", "Native Mix", 
+                               "Garden Mix", "Pro-Mix Bx"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3"))
 BREAK

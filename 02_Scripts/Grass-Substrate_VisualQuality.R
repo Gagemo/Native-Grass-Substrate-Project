@@ -51,35 +51,25 @@ capture.output(summary(two.way), file="03_Figures/Two_Way_Visual.doc")
 ## INTERACTION BETWEEN SPECIES & SOIL NOT SIGNIFICANT ##
 ## VISUAL QUALITY WAS SIGNIFICANTLY AFFECTED BY SOIL  ##
 
+HSD.test(two.way,
+         trt = c("Species", "Soil"),
+         console = TRUE # print results
+)
+TukeyHSD(two.way, which = "Species:Soil")
+
+################# Shapiro-Wilk Test ############################################
+
+# Extract the residuals
+aov_residuals <- residuals(object = two.way)
+# Run Shapiro-Wilk test
+shapiro.test(x = aov_residuals)
+
 ################## Plot Residuals, Q-Q Plot ####################################
 
 par(mfrow=c(2,2))
 plot(two.way)
 vq <- GRASS$Visual_Quality
 hist(vq)
-
-##################  One-Way ANOVA - Visual Quality #############################
-### Create Individual Data Frames to Analyze Variance per Species ###
-
-indian = filter(GRASS, Species == "Indiangrass")
-wire = filter(GRASS, Species == "Wiregrass")
-sugar = filter(GRASS, Species == "Sugarcane")
-
-i.one.way <- aov(Visual_Quality ~ Soil, data = indian)
-summary(i.one.way)
-
-w.one.way <- aov(Visual_Quality ~ Soil, data = wire)
-summary(w.one.way)
-
-s.one.way <- aov(Visual_Quality ~ Soil, data = sugar)
-summary(s.one.way)
-
-i.tukey <- TukeyHSD(i.one.way)
-i.tukey
-w.tukey <- TukeyHSD(w.one.way)
-w.tukey
-s.tukey <- TukeyHSD(s.one.way)
-s.tukey
 
 ################################################################################
 ################################################################################
@@ -88,11 +78,16 @@ s.tukey
 ################################################################################
 
 ####################### Two-Way ANOVA Visual Data ##############################
-
 two.way <- 
   aov(Root_Quality_Scale ~ Species*Soil, data = GRASS)
 summary(two.way)
 capture.output(summary(two.way), file="03_Figures/Two_Way_Root_Visual.doc")
+
+HSD.test(two.way,
+         trt = c("Species", "Soil"),
+         console = TRUE # print results
+)
+TukeyHSD(two.way, which = "Species:Soil")
 
 ## INTERACTION BETWEEN SPECIES & SOIL NOT SIGNIFICANT ##
 ## VISUAL ROOT QUALITY WAS SIGNIFICANTLY AFFECTED BY SOIL  ##
@@ -104,25 +99,10 @@ plot(two.way)
 Rq <- GRASS$Root_Quality_Scale
 hist(Rq)
 
-##################  One-Way ANOVA - Visual Quality #############################
-### Create Individual Data Frames to Analyze Variance per Species ###
+################# Shapiro-Wilk Test ############################################
 
-indian = filter(GRASS, Species == "Indiangrass")
-wire = filter(GRASS, Species == "Wiregrass")
-sugar = filter(GRASS, Species == "Sugarcane")
+# Extract the residuals
+aov_residuals <- residuals(object = two.way)
+# Run Shapiro-Wilk test
+shapiro.test(x = aov_residuals)
 
-i.one.way <- aov(Root_Quality_Scale ~ Soil, data = indian)
-summary(i.one.way)
-
-w.one.way <- aov(Root_Quality_Scale ~ Soil, data = wire)
-summary(w.one.way)
-
-s.one.way <- aov(Root_Quality_Scale ~ Soil, data = sugar)
-summary(s.one.way)
-
-i.tukey <- TukeyHSD(i.one.way)
-i.tukey
-w.tukey <- TukeyHSD(w.one.way)
-w.tukey
-s.tukey <- TukeyHSD(s.one.way)
-s.tukey
