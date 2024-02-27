@@ -97,7 +97,3 @@ ANOVA_MoistureContent <-
 summary(ANOVA_MoistureContent)
 TukeyHSD(ANOVA_MoistureContent)
 leveneTest(MoistureContent ~ Soil, data = GRASS)
-
-
-
-
