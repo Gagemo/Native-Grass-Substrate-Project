@@ -55,45 +55,60 @@ GRASS$ContainerCapacity = ((((GRASS$Wet_Mass) - 5.55)*100)/160)
 GRASS$TotalPorosity = (GRASS$AirPorosity+GRASS$ContainerCapacity)
 GRASS$MoistureContent = ((GRASS$Mass - GRASS$Dry_Mass)*100)/5.55
 
-GRASS %>%
+MEAN = GRASS %>%
   group_by(Soil) %>%
   summarise_at(vars(Mass, Water_Volume, Wet_Mass, Dry_Mass, Bulk, 
                     ParticleDensity, AirPorosity, ContainerCapacity, 
                     TotalPorosity, MoistureContent), list(name = mean))
+MEAN = MEAN %>% select(c(Soil,MoistureContent_name,AirPorosity_name,
+                           TotalPorosity_name,ContainerCapacity_name,
+                           Bulk_name,ParticleDensity_name))  
+
 ####################### ANOVA ##############################
+
+
+ANOVA_MoistureContent <- 
+  aov(MoistureContent ~ Soil, data = GRASS)
+summary(ANOVA_MoistureContent)
+HSD = HSD.test(ANOVA_MoistureContent, trt = c("Soil"))
+HSD
+leveneTest(MoistureContent ~ Soil, data = GRASS)
+
+ANOVA_AirPorosity <- 
+  aov(AirPorosity ~ Soil, data = GRASS)
+summary(ANOVA_AirPorosity)
+HSD = HSD.test(ANOVA_AirPorosity, trt = c("Soil"))
+HSD
+leveneTest(AirPorosity ~ Soil, data = GRASS)
+
+ANOVA_TotalPorosity <- 
+  aov(TotalPorosity ~ Soil, data = GRASS)
+summary(ANOVA_TotalPorosity)
+HSD = HSD.test(ANOVA_TotalPorosity, trt = c("Soil"))
+HSD
+leveneTest(TotalPorosity ~ Soil, data = GRASS)
+
+ANOVA_ContainerCapacity <- 
+  aov(ContainerCapacity ~ Soil, data = GRASS)
+summary(ANOVA_ContainerCapacity)
+HSD = HSD.test(ANOVA_ContainerCapacity, trt = c("Soil"))
+HSD
+leveneTest(ContainerCapacity ~ Soil, data = GRASS)
 
 ANOVA_Bulk <- 
   aov(Bulk ~ Soil, data = GRASS)
 summary(ANOVA_Bulk)
-TukeyHSD(ANOVA_Bulk)
+HSD = HSD.test(ANOVA_Bulk, trt = c("Soil"))
+HSD
 leveneTest(Bulk ~ Soil, data = GRASS)
 
 ANOVA_ParticleDensity <- 
   aov(ParticleDensity ~ Soil, data = GRASS)
 summary(ANOVA_ParticleDensity)
-TukeyHSD(ANOVA_ParticleDensity)
+HSD = HSD.test(ANOVA_ParticleDensity, trt = c("Soil"))
+HSD
 leveneTest(ParticleDensity ~ Soil, data = GRASS)
 
-ANOVA_AirPorosity <- 
-  aov(AirPorosity ~ Soil, data = GRASS)
-summary(ANOVA_AirPorosity)
-TukeyHSD(ANOVA_AirPorosity)
-leveneTest(AirPorosity ~ Soil, data = GRASS)
 
-ANOVA_ContainerCapacity <- 
-  aov(ContainerCapacity ~ Soil, data = GRASS)
-summary(ANOVA_ContainerCapacity)
-TukeyHSD(ANOVA_ContainerCapacity)
-leveneTest(ContainerCapacity ~ Soil, data = GRASS)
 
-ANOVA_TotalPorosity <- 
-  aov(TotalPorosity ~ Soil, data = GRASS)
-summary(ANOVA_TotalPorosity)
-TukeyHSD(ANOVA_TotalPorosity)
-leveneTest(TotalPorosity ~ Soil, data = GRASS)
 
-ANOVA_MoistureContent <- 
-  aov(MoistureContent ~ Soil, data = GRASS)
-summary(ANOVA_MoistureContent)
-TukeyHSD(ANOVA_MoistureContent)
-leveneTest(MoistureContent ~ Soil, data = GRASS)
