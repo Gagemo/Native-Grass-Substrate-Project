@@ -52,7 +52,7 @@ GRASS$Soil = factor(GRASS$Soil,
 two.way <- 
   aov(Average_Max_Height ~ Species*Soil, data = GRASS) %>% add_significance()
 summary(two.way)
-capture.output(summary(two.way), file="03_Figures/Two_Way_AvgMaxHgt.doc")
+capture.output(summary(two.way), file="03_Figures/Two_Way_MaxHgt.doc")
 
 ## INTERACTION BETWEEN SPECIES & SOIL NOT SIGNIFICANT ##
 ## GROWTH HEIGHT WAS SIGNIFICANTLY AFFECTED BY SOIL   ##
@@ -98,7 +98,7 @@ dt <- GRASS %>%
 cld2 <- data.frame(letters = tukey.cld$`Species:Soil`$Letters)
 dt$tukey.cld <- cld2$letters
 
-################### Box Plot - Average Max Growth Heights ######################
+################### Box Plot - Max Growth Heights ######################
 supp.labs <- c("Indiangrass","Sugarcane Plumegrass","Wiregrass")
 names(supp.labs) <- c("Indiangrass","Sugarcane","Wiregrass")
 
@@ -140,18 +140,22 @@ Avg_Max
 ggsave("03_Figures/Average.Max.Growth.Height2.png", Avg_Max, bg= NA,
        scale = 1, width = 16, height = 6, dpi = 1500)
 
+################################################################################
+################## Breaking Point Height #######################################
+################################################################################
+
 ################## Two-Way ANOVA Breaking Point Height #########################
 
 two.way <- 
   aov(Breaking_Point ~ Species*Soil, data = GRASS)
 summary(two.way)
-capture.output(summary(two.way), file="03_Figures/Two_Way_AvgMaxHgt.doc")
+capture.output(summary(two.way), file="03_Figures/Two_Way_BreakingPoint.doc")
 ## INTERACTION BETWEEN SPECIES & SOIL NOT SIGNIFICANT ##
 ## BREAKING POINT HEIGHT WAS SIGNIFICANTLY AFFECTED BY SOIL   ##
 
 ########################## Tukey Test - Multiple Comparisons ###################
 
-tukey <-TukeyHSD(two.way)
+tukey <-TukeyHSD(two.way) 
 tukey
 
 HSD = HSD.test(two.way, trt = c("Species","Soil"))
