@@ -1,6 +1,0 @@
-            Df Sum Sq Mean Sq F value   Pr(>F)    
-Species      2  14408    7204  68.284 1.63e-15 ***
-Soil         3   2036     679   6.433 0.000835 ***
-Residuals   54   5697     106                     
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1

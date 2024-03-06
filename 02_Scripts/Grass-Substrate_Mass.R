@@ -144,7 +144,8 @@ plot(two.way.R)
 ########################## Tukey Test - Multiple Comparisons ###################
 
 tukey.plot.test.R<-TukeyHSD(two.way.R)
-tukey.plot.test.R
+tukey.plot.test.R= as.data.frame(tukey.plot.test.R[3])
+write.csv(tukey.plot.test.R, file="03_Figures/tukey.csv")
 
 HSD.R = HSD.test(two.way.R, trt = c("Species","Soil"))
 HSD.R
