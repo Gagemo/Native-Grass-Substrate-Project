@@ -135,9 +135,9 @@ i.max =
         axis.ticks = element_blank()) +
   ylab("Max height (cm)") +
   xlab("") +
-  scale_fill_manual(name = "Substrate Media", 
-                    labels = c("Pro-Mix 55BK", "Native Mix", 
-                               "Garden Mix", "Pro-Mix Bx"), 
+  scale_fill_manual(name = "", 
+                    labels = c("Pro-mix 55bk", "Native mix", 
+                               "Garden mix", "Pro-mix bx"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 i.max
@@ -147,7 +147,7 @@ s.max =
   geom_violin(size = 0.5, color="black", show.legend = FALSE) +
   geom_point(shape=16, show.legend = FALSE, size =2) +
   facet_grid(. ~ Species, labeller = labeller(Species = supp.labs)) +
-  geom_text(data = s.dt, aes(label = new, y = 95), size=8, vjust = -0.5) +
+  geom_text(data = s.dt, aes(label = tukey.cld, y = 95), size=8, vjust = -0.5) +
   ylim(0,105)+
   theme_bw() +
   theme(plot.title = element_blank(),
@@ -169,9 +169,9 @@ s.max =
         axis.ticks = element_blank())+
   ylab("Max height (cm)") +
   xlab("") +
-  scale_fill_manual(name = "Substrate Media", 
-                    labels = c("Pro-Mix 55BK", "Native Mix", 
-                               "Garden Mix", "Pro-Mix Bx"), 
+  scale_fill_manual(name = "", 
+                    labels = c("Pro-mix 55bk", "Native mix", 
+                               "Garden mix", "Pro-mix bx"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 s.max
@@ -181,7 +181,7 @@ w.max =
   geom_violin(size = 0.5, color="black", show.legend = FALSE) +
   geom_point(shape=16, show.legend = FALSE, size =2) +
   facet_grid(. ~ Species, labeller = labeller(Species = supp.labs)) +
-  geom_text(data = w.dt, aes(label = new, y = 95), size=8, vjust = -0.5) +
+  geom_text(data = w.dt, aes(label = tukey.cld, y = 95), size=8, vjust = -0.5) +
   ylim(0,105)+
   theme_bw() +
   theme(plot.title = element_blank(),
@@ -203,9 +203,9 @@ w.max =
         axis.ticks = element_blank())+
   ylab("Max height (cm)") +
   xlab("") +
-  scale_fill_manual(name = "Substrate Media", 
-                    labels = c("Pro-Mix 55BK", "Native Mix", 
-                               "Garden Mix", "Pro-Mix Bx"), 
+  scale_fill_manual(name = "", 
+                    labels = c("Pro-mix 55bk", "Native mix", 
+                               "Garden mix", "Pro-mix bx"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 w.max
@@ -274,8 +274,8 @@ i.break =
   ggplot(indian, aes(x = Soil, y = Breaking_Point, fill = Soil)) + 
   geom_violin(size = 0.5, color="black", show.legend = FALSE) +
   geom_point(shape=16, show.legend = FALSE, size =2) +
-  geom_text(data = i.dt, aes(label = new, y = 65), size=8, vjust = -0.5) +
-  ylim(0,70)+
+  geom_text(data = i.dt, aes(label = tukey.cld, y = 95), size=8, vjust = -0.5) +
+  ylim(0,105)+
   theme_bw() +
   theme(plot.title = element_blank(),
         axis.title.x = element_blank(),
@@ -298,9 +298,9 @@ i.break =
         axis.ticks = element_blank()) +
   ylab("Breaking height (cm)") +
   xlab("") +
-  scale_fill_manual(name = "Substrate Media", 
-                    labels = c("Pro-Mix 55BK", "Native Mix", 
-                               "Garden Mix", "Pro-Mix Bx"), 
+  scale_fill_manual(name = "", 
+                    labels = c("Pro-mix 55bk", "Native mix", 
+                               "Garden mix", "Pro-mix bx"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 i.break
@@ -309,8 +309,8 @@ s.break =
   ggplot(sugar, aes(x = Soil, y = Breaking_Point, fill = Soil)) + 
   geom_violin(size = 0.5, color="black", show.legend = FALSE) +
   geom_point(shape=16, show.legend = FALSE, size =2) +
-  geom_text(data = s.dt, aes(label = new, y = 65), size=8, vjust = -0.5) +
-  ylim(0,70)+
+  geom_text(data = s.dt, aes(label = tukey.cld, y = 95), size=8, vjust = -0.5) +
+  ylim(0,105)+
   theme_bw() +
   theme(plot.title = element_blank(),
         axis.title.x = element_blank(),
@@ -331,9 +331,9 @@ s.break =
         axis.ticks = element_blank())+
   ylab("Breaking height (cm)") +
   xlab("") +
-  scale_fill_manual(name = "Substrate Media", 
-                    labels = c("Pro-Mix 55BK", "Native Mix", 
-                               "Garden Mix", "Pro-Mix Bx"), 
+  scale_fill_manual(name = "", 
+                    labels = c("Pro-mix 55bk", "Native mix", 
+                               "Garden mix", "Pro-mix bx"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 s.break
@@ -342,8 +342,8 @@ w.break =
   ggplot(wire, aes(x = Soil, y = Breaking_Point, fill = Soil)) + 
   geom_violin(size = 0.5, color="black", show.legend = TRUE) +
   geom_point(shape=16, show.legend = FALSE, size =2) +
-  geom_text(data = w.dt, aes(label = new, y = 65), size=8, vjust = -0.5) +
-  ylim(0,70)+
+  geom_text(data = w.dt, aes(label = tukey.cld, y = 95), size=8, vjust = -0.5) +
+  ylim(0,105)+
   theme_bw() +
   theme(plot.title = element_blank(),
         axis.title.x = element_blank(),
@@ -365,9 +365,9 @@ w.break =
         legend.position="bottom")+
   ylab("Breaking height (cm)") +
   xlab("") +
-  scale_fill_manual(name = "Substrate Media", 
-                    labels = c("Pro-Mix 55BK", "Native Mix", 
-                               "Garden Mix", "Pro-Mix Bx"), 
+  scale_fill_manual(name = "", 
+                    labels = c("Pro-mix 55bk", "Native mix", 
+                               "Garden mix", "Pro-mix bx"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 w.break

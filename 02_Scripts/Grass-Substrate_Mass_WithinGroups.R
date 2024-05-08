@@ -46,7 +46,7 @@ GRASS$Soil = factor(GRASS$Soil,
                     levels = c("ProMix55BK", "NativeMix", 
                                "GardenMix", "ProMixBx"))
 
-################## One-Way ANOVA Max Height ####################################
+################## One-Way ANOVA Shoot_Weight ##################################
 
 indian = filter(GRASS, Species == "Indiangrass")
 sugar = filter(GRASS, Species == "Sugarcane")
@@ -90,7 +90,7 @@ w.dt <- wire %>%
   arrange(desc(w)) %>% 
   ungroup() %>% 
   mutate(Soil = factor(Soil,levels = c("ProMix55BK", "NativeMix", "GardenMix", 
-                                       "ProMixBx"), ordered = TRUE)
+                                       "ProMixBx"), ordered = TRUE))
 
 # extracting the compact letter display and adding to the Tk table
 i.cld2 <- data.frame(letters = i.tukey.cld$Soil$Letters)
@@ -102,7 +102,7 @@ w.cld2 <- data.frame(letters = w.tukey.cld$Soil$Letters)
 w.dt$tukey.cld <- w.cld2$letters
 w.dt$new <- c("e", "e", "e", "e")
 
-################### Box Plot - Max Height ######################
+################### Box Plot - Shoot Weight ######################
 supp.labs <- c("Indiangrass","Sugarcane plumegrass","Wiregrass")
 names(supp.labs) <- c("Indiangrass","Sugarcane","Wiregrass")
 
@@ -111,8 +111,8 @@ i.max =
   geom_violin(size = 0.5, color="black", show.legend = FALSE) +
   geom_point(shape=16, show.legend = FALSE, size =2) +
   facet_grid(. ~ Species, labeller = labeller(Species = supp.labs)) +
-  geom_text(data = i.dt, aes(label = tukey.cld, y = 18), size=8, vjust = -0.5) +
-  ylim(0,20)+
+  geom_text(data = i.dt, aes(label = tukey.cld, y = 35), size=8, vjust = -0.5) +
+  ylim(0,40)+
   theme_bw() +
   theme(plot.title = element_blank(),
         axis.title.x = element_blank(),
@@ -132,11 +132,11 @@ i.max =
         strip.text = element_text(color = "black", size = 30, face="bold"),
         text = element_text(family = "sans"),
         axis.ticks = element_blank()) +
-  ylab("Shoot Weight (g)") +
+  ylab("Shoot mass (g)") +
   xlab("") +
-  scale_fill_manual(name = "Substrate Media", 
-                    labels = c("Pro-Mix 55BK", "Native Mix", 
-                               "Garden Mix", "Pro-Mix Bx"), 
+  scale_fill_manual(name = "", 
+                    labels = c("Pro-mix 55bk", "Native mix", 
+                               "Garden mix", "Pro-mix bx"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 i.max
@@ -146,8 +146,8 @@ s.max =
   geom_violin(size = 0.5, color="black", show.legend = FALSE) +
   geom_point(shape=16, show.legend = FALSE, size =2) +
   facet_grid(. ~ Species, labeller = labeller(Species = supp.labs)) +
-  geom_text(data = s.dt, aes(label = new, y = 18), size=8, vjust = -0.5) +
-  ylim(0,20)+
+  geom_text(data = s.dt, aes(label = tukey.cld, y = 35), size=8, vjust = -0.5) +
+  ylim(0,40)+
   theme_bw() +
   theme(plot.title = element_blank(),
         axis.title.x = element_blank(),
@@ -166,11 +166,11 @@ s.max =
         strip.text = element_text(color = "black", size = 30, face="bold"),
         text = element_text(family = "sans"),
         axis.ticks = element_blank())+
-  ylab("Shoot Weight (g)") +
+  ylab("Shoot mass (g)") +
   xlab("") +
-  scale_fill_manual(name = "Substrate Media", 
-                    labels = c("Pro-Mix 55BK", "Native Mix", 
-                               "Garden Mix", "Pro-Mix Bx"), 
+  scale_fill_manual(name = "", 
+                    labels = c("Pro-mix 55bk", "Native mix", 
+                               "Garden mix", "Pro-mix bx"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 s.max
@@ -180,8 +180,8 @@ w.max =
   geom_violin(size = 0.5, color="black", show.legend = FALSE) +
   geom_point(shape=16, show.legend = FALSE, size =2) +
   facet_grid(. ~ Species, labeller = labeller(Species = supp.labs)) +
-  geom_text(data = w.dt, aes(label = new, y = 18), size=8, vjust = -0.5) +
-  ylim(0,20)+
+  geom_text(data = w.dt, aes(label = tukey.cld, y = 35), size=8, vjust = -0.5) +
+  ylim(0,40)+
   theme_bw() +
   theme(plot.title = element_blank(),
         axis.title.x = element_blank(),
@@ -200,11 +200,11 @@ w.max =
         strip.text = element_text(color = "black", size = 30, face="bold"),
         text = element_text(family = "sans"),
         axis.ticks = element_blank())+
-  ylab("Max height (cm)") +
+  ylab("Shoot mass (g)") +
   xlab("") +
-  scale_fill_manual(name = "Substrate Media", 
-                    labels = c("Pro-Mix 55BK", "Native Mix", 
-                               "Garden Mix", "Pro-Mix Bx"), 
+  scale_fill_manual(name = "", 
+                    labels = c("Pro-mix 55bk", "Native mix", 
+                               "Garden mix", "Pro-mix bx"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 w.max
@@ -267,13 +267,13 @@ w.cld2 <- data.frame(letters = w.tukey.cld$Soil$Letters)
 w.dt$tukey.cld <- w.cld2$letters
 w.dt$new <- c("i", "i", "i", "i")
 
-################### Box Plot - Breaking Heights  ######################
+################### Box Plot - Root Mass  ######################
 
 i.break = 
-  ggplot(indian, aes(x = Soil, y = Shoot_Weight, fill = Soil)) + 
+  ggplot(indian, aes(x = Soil, y = Root_Weight, fill = Soil)) + 
   geom_violin(size = 0.5, color="black", show.legend = FALSE) +
   geom_point(shape=16, show.legend = FALSE, size =2) +
-  geom_text(data = i.dt, aes(label = new, y = 35), size=8, vjust = -0.5) +
+  geom_text(data = i.dt, aes(label = tukey.cld, y = 35), size=8, vjust = -0.5) +
   ylim(0,40)+
   theme_bw() +
   theme(plot.title = element_blank(),
@@ -295,20 +295,20 @@ i.break =
         text = element_text(family = "sans"),
         axis.ticks.x=element_blank(),
         axis.ticks = element_blank()) +
-  ylab("Root Shoot (g)") +
+  ylab("Root mass (g)") +
   xlab("") +
-  scale_fill_manual(name = "Substrate Media", 
-                    labels = c("Pro-Mix 55BK", "Native Mix", 
-                               "Garden Mix", "Pro-Mix Bx"), 
+  scale_fill_manual(name = "", 
+                    labels = c("Pro-mix 55bk", "Native mix", 
+                               "Garden mix", "Pro-mix bx"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 i.break
 
 s.break = 
-  ggplot(sugar, aes(x = Soil, y = Shoot_Weight, fill = Soil)) + 
+  ggplot(sugar, aes(x = Soil, y = Root_Weight, fill = Soil)) + 
   geom_violin(size = 0.5, color="black", show.legend = FALSE) +
   geom_point(shape=16, show.legend = FALSE, size =2) +
-  geom_text(data = s.dt, aes(label = new, y = 35), size=8, vjust = -0.5) +
+  geom_text(data = s.dt, aes(label = tukey.cld, y = 35), size=8, vjust = -0.5) +
   ylim(0,40)+
   theme_bw() +
   theme(plot.title = element_blank(),
@@ -328,20 +328,20 @@ s.break =
         strip.text = element_text(color = "black", size = 30, face="bold"),
         text = element_text(family = "sans"),
         axis.ticks = element_blank())+
-  ylab("Root Shoot (g)") +
+  ylab("Root mass (g)") +
   xlab("") +
-  scale_fill_manual(name = "Substrate Media", 
-                    labels = c("Pro-Mix 55BK", "Native Mix", 
-                               "Garden Mix", "Pro-Mix Bx"), 
+  scale_fill_manual(name = "", 
+                    labels = c("Pro-mix 55bk", "Native mix", 
+                               "Garden mix", "Pro-mix bx"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 s.break
 
 w.break = 
-  ggplot(wire, aes(x = Soil, y = Shoot_Weight, fill = Soil)) + 
+  ggplot(wire, aes(x = Soil, y = Root_Weight, fill = Soil)) + 
   geom_violin(size = 0.5, color="black", show.legend = TRUE) +
   geom_point(shape=16, show.legend = FALSE, size =2) +
-  geom_text(data = w.dt, aes(label = new, y = 35), size=8, vjust = -0.5) +
+  geom_text(data = w.dt, aes(label = tukey.cld, y = 35), size=8, vjust = -0.5) +
   ylim(0,40)+
   theme_bw() +
   theme(plot.title = element_blank(),
@@ -362,11 +362,11 @@ w.break =
         text = element_text(family = "sans"),
         axis.ticks = element_blank(),
         legend.position="bottom")+
-  ylab("Root Shoot (g)") +
+  ylab("Root mass (g)") +
   xlab("") +
-  scale_fill_manual(name = "Substrate Media", 
-                    labels = c("Pro-Mix 55BK", "Native Mix", 
-                               "Garden Mix", "Pro-Mix Bx"), 
+  scale_fill_manual(name = "", 
+                    labels = c("Pro-mix 55bk", "Native mix", 
+                               "Garden mix", "Pro-mix bx"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 w.break
@@ -381,3 +381,4 @@ ggsave("03_Figures/Combined_Mass_withinGroups.png", combined, bg='white',
 #################### Correlation Test - Shoot/Root Mass ########################
 
 cor.test(GRASS$Shoot_Weight, GRASS$Root_Weight)
+
