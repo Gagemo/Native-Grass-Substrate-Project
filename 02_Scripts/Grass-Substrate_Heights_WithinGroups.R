@@ -136,8 +136,8 @@ i.max =
   ylab("Max height (cm)") +
   xlab("") +
   scale_fill_manual(name = "", 
-                    labels = c("Pro-mix 55bk", "Native mix", 
-                               "Garden mix", "Pro-mix bx"), 
+                    labels = c("Pro-Mix 55BK", "Native mix", 
+                               "Garden mix", "Pro-Mix BX"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 i.max
@@ -170,8 +170,8 @@ s.max =
   ylab("Max height (cm)") +
   xlab("") +
   scale_fill_manual(name = "", 
-                    labels = c("Pro-mix 55bk", "Native mix", 
-                               "Garden mix", "Pro-mix bx"), 
+                    labels = c("Pro-Mix 55BK", "Native mix", 
+                               "Garden mix", "Pro-Mix BX"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 s.max
@@ -204,8 +204,8 @@ w.max =
   ylab("Max height (cm)") +
   xlab("") +
   scale_fill_manual(name = "", 
-                    labels = c("Pro-mix 55bk", "Native mix", 
-                               "Garden mix", "Pro-mix bx"), 
+                    labels = c("Pro-Mix 55BK", "Native mix", 
+                               "Garden mix", "Pro-Mix BX"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 w.max
@@ -299,8 +299,8 @@ i.break =
   ylab("Breaking height (cm)") +
   xlab("") +
   scale_fill_manual(name = "", 
-                    labels = c("Pro-mix 55bk", "Native mix", 
-                               "Garden mix", "Pro-mix bx"), 
+                    labels = c("Pro-Mix 55BK", "Native mix", 
+                               "Garden mix", "Pro-Mix BX"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 i.break
@@ -332,8 +332,8 @@ s.break =
   ylab("Breaking height (cm)") +
   xlab("") +
   scale_fill_manual(name = "", 
-                    labels = c("Pro-mix 55bk", "Native mix", 
-                               "Garden mix", "Pro-mix bx"), 
+                    labels = c("Pro-Mix 55BK", "Native mix", 
+                               "Garden mix", "Pro-Mix BX"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 s.break
@@ -366,8 +366,8 @@ w.break =
   ylab("Breaking height (cm)") +
   xlab("") +
   scale_fill_manual(name = "", 
-                    labels = c("Pro-mix 55bk", "Native mix", 
-                               "Garden mix", "Pro-mix bx"), 
+                    labels = c("Pro-Mix 55BK", "Native mix", 
+                               "Garden mix", "Pro-Mix BX"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 w.break

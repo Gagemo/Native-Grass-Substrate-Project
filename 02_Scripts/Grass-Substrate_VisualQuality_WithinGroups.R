@@ -112,7 +112,7 @@ i.max =
   geom_violin(size = 0.5, color="black", show.legend = FALSE) +
   geom_point(shape=16, show.legend = FALSE, size =2) +
   facet_grid(. ~ Species, labeller = labeller(Species = supp.labs)) +
-  geom_text(data = i.dt, aes(label = tukey.cld, y = 4), size=8, vjust = -0.5) +
+  geom_text(data = i.dt, aes(label = tukey.cld, y = 4), size=9, vjust = -0.5) +
   ylim(0,4.5)+
   theme_bw() +
   theme(plot.title = element_blank(),
@@ -133,11 +133,11 @@ i.max =
         strip.text = element_text(color = "black", size = 30, face="bold"),
         text = element_text(family = "sans"),
         axis.ticks = element_blank()) +
-  ylab("Shoot quality") +
+  ylab("Shoot visual quality") +
   xlab("") +
   scale_fill_manual(name = "", 
-                    labels = c("Pro-mix 55bk", "Native mix", 
-                               "Garden mix", "Pro-mix bx"), 
+                    labels = c("Pro-Mix 55BK", "Native mix", 
+                               "Garden mix", "Pro-Mix BX"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 i.max
@@ -147,41 +147,7 @@ s.max =
   geom_violin(size = 0.5, color="black", show.legend = FALSE) +
   geom_point(shape=16, show.legend = FALSE, size =2) +
   facet_grid(. ~ Species, labeller = labeller(Species = supp.labs)) +
-  geom_text(data = s.dt, aes(label = tukey.cld, y = 4), size=8, vjust = -0.5) +
-  ylim(0,4.5)+
-  theme_bw() +
-  theme(plot.title = element_blank(),
-        axis.title.x = element_blank(),
-        axis.text.x=element_blank(),
-        axis.title.y =element_blank(),
-        axis.text.y =element_blank(),
-        panel.background = element_rect(color=NA),
-        plot.background = element_rect(color=NA),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        legend.background = element_rect(color=NA),
-        legend.box.background = element_rect(color=NA),
-        strip.background = element_blank(),
-        legend.title = element_text(color = "black", size = 30, face="bold"),
-        legend.text = element_text(color = "black", size = 30),
-        strip.text = element_text(color = "black", size = 30, face="bold"),
-        text = element_text(family = "sans"),
-        axis.ticks = element_blank())+
-  ylab("Shoot quality") +
-  xlab("") +
-  scale_fill_manual(name = "", 
-                    labels = c("Pro-mix 55bk", "Native mix", 
-                               "Garden mix", "Pro-mix bx"), 
-                    values=c("indianred", "seagreen1", 
-                             "gold3", "slateblue3")) 
-s.max
-
-w.max = 
-  ggplot(wire, aes(x = Soil, y = Visual_Quality, fill = Soil)) + 
-  geom_violin(size = 0.5, color="black", show.legend = FALSE) +
-  geom_point(shape=16, show.legend = FALSE, size =2) +
-  facet_grid(. ~ Species, labeller = labeller(Species = supp.labs)) +
-  geom_text(data = w.dt, aes(label = tukey.cld, y = 4), size=8, vjust = -0.5) +
+  geom_text(data = s.dt, aes(label = tukey.cld, y = 4), size=9, vjust = -0.5) +
   ylim(0,4.5)+
   theme_bw() +
   theme(plot.title = element_blank(),
@@ -204,8 +170,42 @@ w.max =
   ylab("Shoot visual quality") +
   xlab("") +
   scale_fill_manual(name = "", 
-                    labels = c("Pro-mix 55bk", "Native mix", 
-                               "Garden mix", "Pro-mix bx"), 
+                    labels = c("Pro-Mix 55BK", "Native mix", 
+                               "Garden mix", "Pro-Mix BX"), 
+                    values=c("indianred", "seagreen1", 
+                             "gold3", "slateblue3")) 
+s.max
+
+w.max = 
+  ggplot(wire, aes(x = Soil, y = Visual_Quality, fill = Soil)) + 
+  geom_violin(size = 0.5, color="black", show.legend = FALSE) +
+  geom_point(shape=16, show.legend = FALSE, size =2) +
+  facet_grid(. ~ Species, labeller = labeller(Species = supp.labs)) +
+  geom_text(data = w.dt, aes(label = tukey.cld, y = 4), size=9, vjust = -0.5) +
+  ylim(0,4.5)+
+  theme_bw() +
+  theme(plot.title = element_blank(),
+        axis.title.x = element_blank(),
+        axis.text.x=element_blank(),
+        axis.title.y =element_blank(),
+        axis.text.y =element_blank(),
+        panel.background = element_rect(color=NA),
+        plot.background = element_rect(color=NA),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        legend.background = element_rect(color=NA),
+        legend.box.background = element_rect(color=NA),
+        strip.background = element_blank(),
+        legend.title = element_text(color = "black", size = 30, face="bold"),
+        legend.text = element_text(color = "black", size = 30),
+        strip.text = element_text(color = "black", size = 30, face="bold"),
+        text = element_text(family = "sans"),
+        axis.ticks = element_blank())+
+  ylab("Shoot visual quality") +
+  xlab("") +
+  scale_fill_manual(name = "", 
+                    labels = c("Pro-Mix 55BK", "Native mix", 
+                               "Garden mix", "Pro-Mix BX"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 w.max
@@ -274,7 +274,7 @@ i.break =
   ggplot(indian, aes(x = Soil, y = Root_Quality_Scale, fill = Soil)) + 
   geom_violin(size = 0.5, color="black", show.legend = FALSE) +
   geom_point(shape=16, show.legend = FALSE, size =2) +
-  geom_text(data = i.dt, aes(label = tukey.cld, y = 4), size=8, vjust = -0.5) +
+  geom_text(data = i.dt, aes(label = tukey.cld, y = 4), size=9, vjust = -0.5) +
   ylim(0,4.5)+
   theme_bw() +
   theme(plot.title = element_blank(),
@@ -296,11 +296,11 @@ i.break =
         text = element_text(family = "sans"),
         axis.ticks.x=element_blank(),
         axis.ticks = element_blank()) +
-  ylab("Root quality") +
+  ylab("Root visual quality") +
   xlab("") +
   scale_fill_manual(name = "", 
-                    labels = c("Pro-mix 55bk", "Native mix", 
-                               "Garden mix", "Pro-mix bx"), 
+                    labels = c("Pro-Mix 55BK", "Native mix", 
+                               "Garden mix", "Pro-Mix BX"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 i.break
@@ -309,7 +309,7 @@ s.break =
   ggplot(sugar, aes(x = Soil, y = Root_Quality_Scale, fill = Soil)) + 
   geom_violin(size = 0.5, color="black", show.legend = FALSE) +
   geom_point(shape=16, show.legend = FALSE, size =2) +
-  geom_text(data = s.dt, aes(label = tukey.cld, y = 4), size=8, vjust = -0.5) +
+  geom_text(data = s.dt, aes(label = tukey.cld, y = 4), size=9, vjust = -0.5) +
   ylim(0,4.5)+
   theme_bw() +
   theme(plot.title = element_blank(),
@@ -329,11 +329,11 @@ s.break =
         strip.text = element_text(color = "black", size = 30, face="bold"),
         text = element_text(family = "sans"),
         axis.ticks = element_blank())+
-  ylab("Root quality") +
+  ylab("Root visual quality") +
   xlab("") +
   scale_fill_manual(name = "", 
-                    labels = c("Pro-mix 55bk", "Native mix", 
-                               "Garden mix", "Pro-mix bx"), 
+                    labels = c("Pro-Mix 55BK", "Native mix", 
+                               "Garden mix", "Pro-Mix BX"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 s.break
@@ -342,7 +342,7 @@ w.break =
   ggplot(wire, aes(x = Soil, y = Root_Quality_Scale, fill = Soil)) + 
   geom_violin(size = 0.5, color="black", show.legend = TRUE) +
   geom_point(shape=16, show.legend = FALSE, size =2) +
-  geom_text(data = w.dt, aes(label = tukey.cld, y = 4), size=8, vjust = -0.5) +
+  geom_text(data = w.dt, aes(label = tukey.cld, y = 4), size=9, vjust = -0.5) +
   ylim(0,4.5)+
   theme_bw() +
   theme(plot.title = element_blank(),
@@ -363,11 +363,11 @@ w.break =
         text = element_text(family = "sans"),
         axis.ticks = element_blank(),
         legend.position="bottom")+
-  ylab("Root quality") +
+  ylab("Root visual quality") +
   xlab("") +
   scale_fill_manual(name = "", 
-                    labels = c("Pro-mix 55bk", "Native mix", 
-                               "Garden mix", "Pro-mix bx"), 
+                    labels = c("Pro-Mix 55BK", "Native mix", 
+                               "Garden mix", "Pro-Mix BX"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 w.break
@@ -376,7 +376,7 @@ w.break
 combined = ggarrange(i.max, s.max, w.max, i.break, s.break, w.break, 
                      ncol = 3, nrow = 2, common.legend = TRUE, legend="bottom")
 combined
-ggsave("03_Figures/Combined_Mass_withinGroups.png", combined, bg='white',
+ggsave("03_Figures/Combined_Visual_withinGroups.png", combined, bg='white',
        scale = 1, width = 18, height = 12, dpi = 1500)
 
 #################### Correlation Test - Shoot/Root Mass ########################

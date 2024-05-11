@@ -135,8 +135,8 @@ i.max =
   ylab("Shoot mass (g)") +
   xlab("") +
   scale_fill_manual(name = "", 
-                    labels = c("Pro-mix 55bk", "Native mix", 
-                               "Garden mix", "Pro-mix bx"), 
+                    labels = c("Pro-Mix 55BK", "Native mix", 
+                               "Garden mix", "Pro-Mix BX"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 i.max
@@ -169,8 +169,8 @@ s.max =
   ylab("Shoot mass (g)") +
   xlab("") +
   scale_fill_manual(name = "", 
-                    labels = c("Pro-mix 55bk", "Native mix", 
-                               "Garden mix", "Pro-mix bx"), 
+                    labels = c("Pro-Mix 55BK", "Native mix", 
+                               "Garden mix", "Pro-Mix BX"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 s.max
@@ -203,8 +203,8 @@ w.max =
   ylab("Shoot mass (g)") +
   xlab("") +
   scale_fill_manual(name = "", 
-                    labels = c("Pro-mix 55bk", "Native mix", 
-                               "Garden mix", "Pro-mix bx"), 
+                    labels = c("Pro-Mix 55BK", "Native mix", 
+                               "Garden mix", "Pro-Mix BX"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 w.max
@@ -298,8 +298,8 @@ i.break =
   ylab("Root mass (g)") +
   xlab("") +
   scale_fill_manual(name = "", 
-                    labels = c("Pro-mix 55bk", "Native mix", 
-                               "Garden mix", "Pro-mix bx"), 
+                    labels = c("Pro-Mix 55BK", "Native mix", 
+                               "Garden mix", "Pro-Mix BX"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 i.break
@@ -331,8 +331,8 @@ s.break =
   ylab("Root mass (g)") +
   xlab("") +
   scale_fill_manual(name = "", 
-                    labels = c("Pro-mix 55bk", "Native mix", 
-                               "Garden mix", "Pro-mix bx"), 
+                    labels = c("Pro-Mix 55BK", "Native mix", 
+                               "Garden mix", "Pro-Mix BX"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 s.break
@@ -365,8 +365,8 @@ w.break =
   ylab("Root mass (g)") +
   xlab("") +
   scale_fill_manual(name = "", 
-                    labels = c("Pro-mix 55bk", "Native mix", 
-                               "Garden mix", "Pro-mix bx"), 
+                    labels = c("Pro-Mix 55BK", "Native mix", 
+                               "Garden mix", "Pro-Mix BX"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 w.break
