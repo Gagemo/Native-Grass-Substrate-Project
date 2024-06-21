@@ -18,7 +18,7 @@ cat("\014")
 ##########################    Installs Packages   ##############################
 
 list.of.packages <- c("tidyverse", "agricolae", "labelled", 
-                      "multcompView", "ggsignif", "car")
+                      "multcompView", "ggsignif", "car", "tables")
 new.packages <- list.of.packages[!(list.of.packages %in% 
                                      installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
@@ -31,6 +31,7 @@ library(agricolae)
 library(multcompView)
 library(ggsignif)
 library(car)
+library(tables)
 
 ########################### Load Data ##########################################
 

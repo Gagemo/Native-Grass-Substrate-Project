@@ -19,7 +19,7 @@ cat("\014")
 
 list.of.packages <- c("tidyverse", "agricolae", "labelled", "ggpubr",
                       "multcompView", "ggsignif", "showtext", "extrafont",
-                      "rstatix", "likert")
+                      "rstatix", "likert", "tables")
 new.packages <- list.of.packages[!(list.of.packages %in% 
                                      installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
@@ -36,6 +36,7 @@ library(ggpubr)
 library(extrafont)
 library(rstatix)
 library(likert)
+library(tables)
 
 ########################### Load Data ##########################################
 
@@ -63,6 +64,13 @@ summary(w.anova)
 i.tukey = TukeyHSD(i.anova)
 s.tukey = TukeyHSD(s.anova)
 w.tukey = TukeyHSD(w.anova)
+
+tmp <- tabular(Soil ~ Visual_Quality* (mean+sd), data=sugar)
+tmp
+tmp <- tabular(Soil ~ Visual_Quality* (mean+sd), data=indian)
+tmp
+tmp <- tabular(Soil ~ Visual_Quality* (mean+sd), data=wire)
+tmp
 
 i.tukey.cld <- multcompLetters4(i.anova, i.tukey)
 s.tukey.cld <- multcompLetters4(s.anova, s.tukey)
