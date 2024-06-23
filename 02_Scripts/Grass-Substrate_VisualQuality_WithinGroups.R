@@ -233,6 +233,9 @@ i.tukey = TukeyHSD(i.anova)
 s.tukey = TukeyHSD(s.anova)
 w.tukey = TukeyHSD(w.anova)
 
+tmp <- tabular(Soil ~ Root_Quality_Scale* (mean+sd), data=sugar)
+tmp
+
 i.tukey.cld <- multcompLetters4(i.anova, i.tukey)
 s.tukey.cld <- multcompLetters4(s.anova, s.tukey)
 w.tukey.cld <- multcompLetters4(w.anova, w.tukey)
