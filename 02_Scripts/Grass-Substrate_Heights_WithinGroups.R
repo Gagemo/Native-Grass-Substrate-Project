@@ -45,7 +45,7 @@ GRASS <- read.csv("01_Data/Grass Substrate Project - Aboveground Growth.csv")
 
 GRASS$Soil = factor(GRASS$Soil, 
                     levels = c("ProMix55BK", "NativeMix", 
-                               "GardenMix", "ProMixBx"))
+                               "GardenMix", "ProMixHP"))
 
 ################## One-Way ANOVA Max Height ####################################
 
@@ -75,7 +75,7 @@ i.dt <- indian %>%
   arrange(desc(w)) %>% 
   ungroup() %>% 
   mutate(Soil = factor(Soil,levels = c("ProMix55BK", "NativeMix", "GardenMix", 
-                                       "ProMixBx"), ordered = TRUE))
+                                       "ProMixHP"), ordered = TRUE))
 s.dt <- sugar %>% 
   group_by(Species, Soil) %>%
   summarise(w=mean(exp(Average_Max_Height)), 
@@ -83,7 +83,7 @@ s.dt <- sugar %>%
   arrange(desc(w)) %>% 
   ungroup() %>% 
   mutate(Soil = factor(Soil,levels = c("ProMix55BK", "NativeMix", "GardenMix", 
-                                       "ProMixBx"),ordered = TRUE))
+                                       "ProMixHP"),ordered = TRUE))
 s.dt$new <- c("c", "cd", "d", "d")
 
 w.dt <- wire %>% 
@@ -93,7 +93,7 @@ w.dt <- wire %>%
   arrange(desc(w)) %>% 
   ungroup() %>% 
   mutate(Soil = factor(Soil,levels = c("ProMix55BK", "NativeMix", "GardenMix", 
-                                       "ProMixBx"), ordered = TRUE))
+                                       "ProMixHP"), ordered = TRUE))
 w.dt$new <- c("e", "e", "e", "e")
 
 # extracting the compact letter display and adding to the Tk table
@@ -138,7 +138,7 @@ i.max =
   xlab("") +
   scale_fill_manual(name = "", 
                     labels = c("Pro-Mix 55BK", "Native mix", 
-                               "Garden mix", "Pro-Mix BX"), 
+                               "Garden mix", "Pro-Mix HP"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 i.max
@@ -172,7 +172,7 @@ s.max =
   xlab("") +
   scale_fill_manual(name = "", 
                     labels = c("Pro-Mix 55BK", "Native mix", 
-                               "Garden mix", "Pro-Mix BX"), 
+                               "Garden mix", "Pro-Mix HP"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 s.max
@@ -206,7 +206,7 @@ w.max =
   xlab("") +
   scale_fill_manual(name = "", 
                     labels = c("Pro-Mix 55BK", "Native mix", 
-                               "Garden mix", "Pro-Mix BX"), 
+                               "Garden mix", "Pro-Mix HP"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 w.max
@@ -242,7 +242,7 @@ i.dt <- indian %>%
   arrange(desc(w)) %>% 
   ungroup() %>% 
   mutate(Soil = factor(Soil,levels = c("ProMix55BK", "NativeMix", "GardenMix", 
-                                       "ProMixBx"), ordered = TRUE))
+                                       "ProMixHP"), ordered = TRUE))
 
 s.dt <- sugar %>% 
   group_by(Species, Soil) %>%
@@ -251,7 +251,7 @@ s.dt <- sugar %>%
   arrange(desc(w)) %>% 
   ungroup() %>% 
   mutate(Soil = factor(Soil,levels = c("ProMix55BK", "NativeMix", "GardenMix", 
-                                       "ProMixBx"),ordered = TRUE))
+                                       "ProMixHP"),ordered = TRUE))
 
 w.dt <- wire %>% 
   group_by(Species, Soil) %>%
@@ -260,7 +260,7 @@ w.dt <- wire %>%
   arrange(desc(w)) %>% 
   ungroup() %>% 
   mutate(Soil = factor(Soil,levels = c("ProMix55BK", "NativeMix", "GardenMix", 
-                                       "ProMixBx"), ordered = TRUE))
+                                       "ProMixHP"), ordered = TRUE))
 
 
 # extracting the compact letter display and adding to the Tk table
@@ -306,7 +306,7 @@ i.break =
   xlab("") +
   scale_fill_manual(name = "", 
                     labels = c("Pro-Mix 55BK", "Native mix", 
-                               "Garden mix", "Pro-Mix BX"), 
+                               "Garden mix", "Pro-Mix HP"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 i.break
@@ -339,7 +339,7 @@ s.break =
   xlab("") +
   scale_fill_manual(name = "", 
                     labels = c("Pro-Mix 55BK", "Native mix", 
-                               "Garden mix", "Pro-Mix BX"), 
+                               "Garden mix", "Pro-Mix HP"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 s.break
@@ -373,7 +373,7 @@ w.break =
   xlab("") +
   scale_fill_manual(name = "", 
                     labels = c("Pro-Mix 55BK", "Native mix", 
-                               "Garden mix", "Pro-Mix BX"), 
+                               "Garden mix", "Pro-Mix HP"), 
                     values=c("indianred", "seagreen1", 
                              "gold3", "slateblue3")) 
 w.break
